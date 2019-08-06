@@ -1,0 +1,23 @@
+{
+  "name": "devtinder-node-react-react-native-",
+  "version": "1.0.0",
+  "description": "Projeto criado duarante a semana OmniStack da rocketseat",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Simplicio-b/devtinder-node-react-react-native-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Simplicio-b/devtinder-node-react-react-native-/issues"
+  },
+  "homepage": "https://github.com/Simplicio-b/devtinder-node-react-react-native-#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
