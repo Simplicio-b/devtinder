@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/Simplicio-b/devtinder-node-react-react-native-#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "axios": "^0.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.8"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"
