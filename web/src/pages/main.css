@@ -5,6 +5,13 @@
     text-align: center;
 }
 
+.main-container .empty {
+    font-size: 32px;
+    color: #999;
+    font-weight: bold;
+    margin-top: 300px;
+}
+
 .main-container ul {
     list-style: none;
     display: grid;
