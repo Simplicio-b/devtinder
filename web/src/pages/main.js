@@ -1,7 +1,16 @@
 import React from 'react';
 
-export default function Main() {
+import logo from '../assets/logo.svg';
+
+export default function Main({ match }) {
     return (
-        <h1>Hello world !</h1>
+        <div className='main-container'>
+            <img src={logo} alt='Tindev' />
+            <ul>
+                <li>
+                    <img src={logo} alt="Tindev" />
+                </li>
+            </ul>
+        </div>
     );
 }
