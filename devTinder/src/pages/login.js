@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   TextInput,
@@ -11,7 +11,15 @@ import {
 
 import Logo from '../assets/logo.png';
 
-function Login() {
+function Login({ navigation }) {
+
+  const [user, setUser] = useState('');
+
+  function handleLogin() {
+    console.log(user)
+    navigation.navigate('Main')
+  }
+
   return (
     <KeyboardAvoidingView
      behavior="padding"
@@ -26,9 +34,14 @@ function Login() {
             autoCapitalize="none"
             autoCorrect={false}
             placeholder="Digite seu user no git-hub !"
+            value={user}
+            onChangeText={setUser}
         />
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity 
+          onPress={handleLogin}
+          style={styles.button}
+        >
             <Text style={styles.btnText}>Enviar</Text>
         </TouchableOpacity>
     </KeyboardAvoidingView>
