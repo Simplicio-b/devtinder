@@ -32,9 +32,9 @@ function Login({ navigation }) {
     
     const { _id } = res.data;
 
-   await AsyncStorage.setItem('user', _id);
+    await AsyncStorage.setItem('user', _id);
 
-    navigation.navigate('Main', { _id });
+    navigation.navigate('Main', { user: _id });
   }
 
   return (

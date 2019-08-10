@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import AsyncStorage from '@react-native-community/async-storage';
 import {
   Text,
   View,
@@ -8,30 +9,50 @@ import {
   TouchableOpacity
 } from 'react-native';
 
+import API from '../services/API';
+
 import Logo from '../assets/logo.png';
 import Like from '../assets/like.png';
 import Deslike from '../assets/dislike.png';
 
-export default function Main() {
+export default function Main({ navigation }) {
+  const id = navigation.getParam('user');
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    async function loadUsers() {
+      const res = await API.get('/devs', {
+        headers: {
+          user: id,
+        }
+      });
+      setUsers(users.filter(u => e._id != e._id));
+    }
+    loadUsers();
+  }, [id]);
+
+  
+
   return (
     <SafeAreaView style={styles.container}>
       <Image style={styles.logo} source={Logo} />
-
       <View style={styles.cardsContainer}>
-        <View style={[styles.card, { zIndex: 3 }]}>
-          <Image style={styles.avatar} source={{ uri: "https://avatars2.githubusercontent.com/u/33669751?v=4" }} />
-          <View style={styles.footer}>
-            <Text style={styles.name} >Simplicio Baiano</Text>
-            <Text style={styles.bio} numberOfLines={3}>
-              Mlk zika !!! ... Mlk zika !!! ...
-              Mlk zika !!! ... Mlk zika !!! ...
-              Mlk zika !!! ... Mlk zika !!! ...
-              Mlk zika !!! ... Mlk zika !!! ...
-              Mlk zika !!! ... Mlk zika !!! ...
-              Mlk zika !!! ... Mlk zika 
-            </Text>
-          </View>
-        </View>
+        {
+          users > 0 ? 
+          users.map((e, i) => (
+            <View key={e._id} style={[styles.card, { zIndex: users.length - i }]}>
+              <Image style={styles.avatar} source={{uri: e.avatar}} />
+              <View style={styles.footer}>
+                <Text style={styles.name} >{e.name}</Text>
+                <Text style={styles.bio} numberOfLines={3}>
+                  {e.bio}
+                </Text>
+              </View>
+            </View>
+            ))
+            :
+            <Text style={styles.empty}>Acabou :(</Text>
+        }
       </View>
       <View style={styles.buttonsContainer}>
         <TouchableOpacity style={styles.button}>
@@ -56,6 +77,13 @@ const styles = StyleSheet.create({
 
   logo: {
     marginTop: 30
+  },
+
+  empty: {
+    alignSelf: 'center',
+    color: '#999',
+    fontSize: 24,
+    fontWeight: 'bold'
   },
 
   cardsContainer: {
@@ -123,6 +151,6 @@ const styles = StyleSheet.create({
       width: 0,
       height: 2,
     },
-    
+
   }
 });
