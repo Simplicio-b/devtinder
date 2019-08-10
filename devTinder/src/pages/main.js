@@ -3,9 +3,11 @@ import {
   Text
 } from 'react-native';
 
+import Logo from '../assets/logo.png';
+
 function Main() {
   return (
-    <Text>Hello world !</Text>
+    <Text>Hello world ! </Text>
   );
 }
 
