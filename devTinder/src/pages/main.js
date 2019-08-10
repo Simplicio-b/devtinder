@@ -20,22 +20,46 @@ export default function Main({ navigation }) {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    async function loadUsers() {
-      const res = await API.get('/devs', {
-        headers: {
-          user: id,
-        }
-      });
-      setUsers(users.filter(u => e._id != e._id));
-    }
-    loadUsers();
+    (async function loadUsers() {
+        const response = await API.get('/devs', {
+            headers: {
+              user: id
+            }
+        });
+        setUsers(response.data);
+    })();
   }, [id]);
 
-  
+  async function handleLogout(){
+    await AsyncStorage.clear();
+    navigation.navigate('Login');
+  }
+
+  async function handleLike() {
+    const [ user, ...rest ] = users;
+
+    API.post(`/devs/${user._id}/likes`, null, {
+      headers: { user: id },  
+    });
+
+    setUsers(rest);
+  }
+
+  async function handleDeslike() {
+    const [ user, ...rest ] = users;
+
+    API.post(`/devs/${user._id}/likes`, null, {
+      headers: { user: id },  
+    });
+
+    setUsers(rest);
+  }
 
   return (
     <SafeAreaView style={styles.container}>
-      <Image style={styles.logo} source={Logo} />
+      <TouchableOpacity onPress={handleLogout}>
+        <Image style={styles.logo} source={Logo} />
+      </TouchableOpacity>
       <View style={styles.cardsContainer}>
         {
           users > 0 ? 
@@ -55,11 +79,11 @@ export default function Main({ navigation }) {
         }
       </View>
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handleLike}>
           <Image source={Like} />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={handleDeslike}>
           <Image source={Deslike} />
         </TouchableOpacity>
       </View>
