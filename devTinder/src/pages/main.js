@@ -62,7 +62,7 @@ export default function Main({ navigation }) {
       </TouchableOpacity>
       <View style={styles.cardsContainer}>
         {
-          users > 0 ? 
+          users.length != 0 ? 
           users.map((e, i) => (
             <View key={e._id} style={[styles.card, { zIndex: users.length - i }]}>
               <Image style={styles.avatar} source={{uri: e.avatar}} />
@@ -78,15 +78,21 @@ export default function Main({ navigation }) {
             <Text style={styles.empty}>Acabou :(</Text>
         }
       </View>
-      <View style={styles.buttonsContainer}>
-        <TouchableOpacity style={styles.button} onPress={handleLike}>
-          <Image source={Like} />
-        </TouchableOpacity>
-
-        <TouchableOpacity style={styles.button} onPress={handleDeslike}>
-          <Image source={Deslike} />
-        </TouchableOpacity>
-      </View>
+      {
+        users.length > 0 ? (
+          <View style={styles.buttonsContainer}>
+            <TouchableOpacity style={styles.button} onPress={handleLike}>
+              <Image source={Like} />
+            </TouchableOpacity>
+    
+            <TouchableOpacity style={styles.button} onPress={handleDeslike}>
+              <Image source={Deslike} />
+            </TouchableOpacity>
+          </View>
+        )
+        :
+        <View></View>
+      }
     </SafeAreaView>
   );
 }
